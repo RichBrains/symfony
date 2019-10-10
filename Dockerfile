@@ -1,4 +1,4 @@
-FROM php:7-fpm-alpine
+FROM php:7.0-fpm-alpine
 
 RUN apk add --no-cache --virtual .ext-deps \
         libjpeg-turbo-dev \
@@ -9,8 +9,7 @@ RUN apk add --no-cache --virtual .ext-deps \
         nodejs-npm \
         nginx \
         git \
-        inkscape \
-        libmemcached-dev
+        inkscape
 
 RUN apk add --update --no-cache \
     libc6-compat fontconfig \
