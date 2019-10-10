@@ -9,7 +9,15 @@ RUN apk add --no-cache --virtual .ext-deps \
         nodejs-npm \
         nginx \
         git \
-        inkscape
+        inkscape \
+        libmemcached-dev
+
+RUN apk add --update --no-cache \
+    libc6-compat fontconfig \
+    libgcc libstdc++ libx11 glib libxrender libxext libintl \
+    libcrypto1.0 libssl1.0 \
+    ttf-dejavu ttf-droid ttf-freefont ttf-liberation ttf-ubuntu-font-family \
+    jpegoptim optipng pngquant gifsicle
 
 RUN apk add --no-cache --update libmemcached-libs zlib
 RUN set -xe && \
@@ -45,7 +53,7 @@ RUN docker-php-ext-configure pdo_mysql && \
     docker-php-ext-configure gd \
     --with-jpeg-dir=/usr/include --with-png-dir=/usr/include --with-webp-dir=/usr/include --with-freetype-dir=/usr/include
 
-RUN docker-php-ext-install pdo_mysql opcache exif gd && \
+RUN docker-php-ext-install pdo_mysql opcache exif gd zip && \
     docker-php-source delete
 
 COPY default.conf /etc/nginx/conf.d/default.conf
