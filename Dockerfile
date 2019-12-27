@@ -1,4 +1,4 @@
-FROM php:7.0-fpm-alpine
+FROM php:7.4-fpm-alpine
 
 RUN apk add --no-cache --virtual .ext-deps \
         libjpeg-turbo-dev \
@@ -9,14 +9,19 @@ RUN apk add --no-cache --virtual .ext-deps \
         nodejs-npm \
         nginx \
         git \
-        inkscape
+        inkscape \
+        libzip-dev unzip
 
 RUN apk add --update --no-cache \
     libc6-compat fontconfig \
     libgcc libstdc++ libx11 glib libxrender libxext libintl \
-    libcrypto1.0 libssl1.0 \
     ttf-dejavu ttf-droid ttf-freefont ttf-liberation ttf-ubuntu-font-family \
     jpegoptim optipng pngquant gifsicle
+
+
+# Add openssl dependencies for wkhtmltopdf
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories && \
+    apk add --no-cache libcrypto1.0 libssl1.0
 
 RUN apk add --no-cache --update libmemcached-libs zlib
 RUN set -xe && \
@@ -49,8 +54,7 @@ RUN apk add --update --no-cache autoconf g++ imagemagick-dev libtool make pcre-d
 RUN docker-php-ext-configure pdo_mysql && \
     docker-php-ext-configure opcache && \
     docker-php-ext-configure exif && \
-    docker-php-ext-configure gd \
-    --with-jpeg-dir=/usr/include --with-png-dir=/usr/include --with-webp-dir=/usr/include --with-freetype-dir=/usr/include
+    docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
 
 RUN docker-php-ext-install pdo_mysql opcache exif gd zip && \
     docker-php-source delete
