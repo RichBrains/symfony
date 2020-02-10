@@ -55,6 +55,13 @@ RUN docker-php-ext-configure pdo_mysql && \
 RUN docker-php-ext-install pdo_mysql opcache exif gd zip && \
     docker-php-source delete
 
+# xml-core
+RUN apk add libxml2 libxml2-dev libxslt-dev icu-dev && \
+   docker-php-ext-install xsl calendar
+
+RUN docker-php-ext-configure intl --enable-intl && \
+   docker-php-ext-install intl
+
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY entrypoint.sh /entrypoint.sh
 COPY php-fpm.conf /etc/php7/php-fpm.conf
