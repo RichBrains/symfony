@@ -46,10 +46,13 @@ RUN set -xe && \
 
 
 # imagick
-RUN apk add --update --no-cache autoconf g++ imagemagick-dev libtool make pcre-dev \
-    && pecl install imagick \
-    && docker-php-ext-enable imagick \
-    && apk del autoconf g++ libtool make pcre-dev
+RUN set -ex \ 
+&& apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS imagemagick-dev libtool \
+&& export CFLAGS="$PHP_CFLAGS" CPPFLAGS="$PHP_CPPFLAGS" LDFLAGS="$PHP_LDFLAGS" \ 
+&& pecl install imagick \
+&& docker-php-ext-enable imagick \ && apk add --no-cache --virtual .imagick-runtime-deps imagemagick \ 
+&& apk del .phpize-deps
+
 
 RUN docker-php-ext-configure pdo_mysql && \
     docker-php-ext-configure opcache && \
