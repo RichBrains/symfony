@@ -51,6 +51,7 @@ RUN docker-php-ext-install pdo_mysql opcache exif gd && \
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY entrypoint.sh /entrypoint.sh
 COPY php-fpm.conf /etc/php7/php-fpm.conf
+COPY php.ini /usr/local/etc/php/conf.d/php.ini
 
 RUN ln -s /usr/bin/php7 /usr/bin/php && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
