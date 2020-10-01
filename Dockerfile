@@ -1,5 +1,7 @@
 FROM php:7-fpm-alpine
 
+WORKDIR /var/www
+
 RUN apk add --no-cache --virtual .ext-deps \
         libjpeg-turbo-dev \
         libwebp-dev \
