@@ -36,7 +36,7 @@ RUN set -xe && \
 
 
 # imagick
-RUN apk add --update --no-cache autoconf g++ imagemagick-dev libtool make pcre-dev \
+RUN apk add --update --no-cache autoconf g++ imagemagick-dev libtool make pcre-dev icu-dev \
     && pecl install imagick \
     && docker-php-ext-enable imagick \
     && apk del autoconf g++ libtool make pcre-dev
@@ -47,7 +47,7 @@ RUN docker-php-ext-configure pdo_mysql && \
     docker-php-ext-configure gd \
     --with-jpeg --with-webp --with-freetype
 
-RUN docker-php-ext-install pdo_mysql opcache exif gd && \
+RUN docker-php-ext-install pdo_mysql opcache exif gd intl && \
     docker-php-source delete
 
 COPY default.conf /etc/nginx/conf.d/default.conf
