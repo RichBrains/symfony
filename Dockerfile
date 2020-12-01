@@ -56,8 +56,16 @@ RUN set -ex \
 && apk del .phpize-deps
 
 
-
-
+#redis
+ENV EXT_REDIS_VERSION=4.3.0
+RUN docker-php-source extract \
+    # redis
+    && mkdir -p /usr/src/php/ext/redis \
+    && curl -fsSL https://github.com/phpredis/phpredis/archive/$EXT_REDIS_VERSION.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
+    && docker-php-ext-configure redis --enable-redis-igbinary \
+    && docker-php-ext-install redis \
+    # cleanup
+    && docker-php-source delete
 
 RUN docker-php-ext-configure pdo_mysql && \
     docker-php-ext-configure opcache && \
