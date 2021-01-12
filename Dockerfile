@@ -18,6 +18,11 @@ RUN apk add --update --no-cache \
     ttf-dejavu ttf-droid ttf-freefont ttf-liberation ttf-ubuntu-font-family \
     jpegoptim optipng pngquant gifsicle
 
+RUN apk --update add --no-cache --virtual .php-ext-install-deps \
+        libxslt-dev \
+        libgcrypt-dev \
+    \
+    && docker-php-ext-install xsl
 
 # Add openssl dependencies for wkhtmltopdf
 RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories && \
