@@ -9,6 +9,7 @@ RUN apk add --no-cache --virtual .ext-deps \
         freetype-dev \
         libmcrypt-dev \
         nodejs-npm \
+        yarn \
         nginx \
         git \
         inkscape
