@@ -21,6 +21,8 @@ RUN set -xe && \
     apk add --no-cache --update --virtual .memcached-deps zlib-dev libmemcached-dev cyrus-sasl-dev && \
 # Install igbinary (memcached's deps)
     pecl install igbinary && \
+# Install redis
+    pecl install redis && docker-php-ext-enable redis \
 # Install memcached
     ( \
         pecl install --nobuild memcached && \
