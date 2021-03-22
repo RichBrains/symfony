@@ -22,7 +22,7 @@ RUN set -xe && \
 # Install igbinary (memcached's deps)
     pecl install igbinary && \
 # Install redis
-    pecl install redis && docker-php-ext-enable redis \
+    pecl install redis && docker-php-ext-enable redis && \
 # Install memcached
     ( \
         pecl install --nobuild memcached && \
