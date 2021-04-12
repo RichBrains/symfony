@@ -10,7 +10,8 @@ RUN apk add --no-cache --virtual .ext-deps \
         nginx \
         git \
         inkscape \
-        libzip-dev unzip
+        libzip-dev unzip \
+        supervisor
 
 RUN apk add --update --no-cache \
     libc6-compat fontconfig \
