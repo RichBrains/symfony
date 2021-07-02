@@ -59,7 +59,8 @@ RUN docker-php-ext-configure pdo_mysql && \
     docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
 
 RUN docker-php-ext-install pdo_mysql opcache exif gd zip && \
-    docker-php-source delete
+    docker-php-source delete && \
+    npm install --global yarn
 
 COPY php.ini /usr/local/etc/php/conf.d/php.ini
 
