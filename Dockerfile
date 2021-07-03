@@ -1,7 +1,6 @@
-FROM richbrains/symfony:ag-base
+FROM symfony:ag-base
 
-RUN apk add --no-cache --virtual .ext-deps \
-        nginx \
+RUN  apk --update add nginx
 
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY entrypoint.sh /entrypoint.sh
