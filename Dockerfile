@@ -1,4 +1,4 @@
-FROM symfony:ag-base
+FROM richbrains/symfony:ag-base
 
 RUN  apk --update add nginx
 
