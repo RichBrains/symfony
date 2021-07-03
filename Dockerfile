@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine
+FROM php:7.4.21-fpm-alpine3.13
 
 RUN apk add --no-cache --virtual .ext-deps \
         libjpeg-turbo-dev \
@@ -15,7 +15,7 @@ RUN apk add --no-cache --virtual .ext-deps \
 RUN apk add --update --no-cache \
     libc6-compat fontconfig \
     libgcc libstdc++ libx11 glib libxrender libxext libintl \
-    ttf-dejavu ttf-droid ttf-freefont ttf-liberation \
+    ttf-dejavu ttf-droid ttf-freefont ttf-liberation ttf-ubuntu-font-family \
     jpegoptim optipng pngquant gifsicle
 
 
