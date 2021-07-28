@@ -81,7 +81,7 @@ COPY php-fpm.conf /etc/php7/php-fpm.conf
 COPY php.ini /usr/local/etc/php/conf.d/php.ini
 
 RUN ln -s /usr/bin/php7 /usr/bin/php && \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --1 && \
     mkdir -p /run/nginx && mkdir -p /init/ && chmod 777 /entrypoint.sh
 
 ENTRYPOINT /entrypoint.sh
